@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./login.css">
+    <title>Log in - Kebantai</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="page-header">
+            <div id="logo">
+                <a href="#">KEBANTAI</a>
+            </div>
+            <div class="toggle" onclick="toggleMenu();"></div>
+            <ul class="navigation">
+                <li><a href="#">WHY KEBANTAI?</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#" class="active-page">LOG IN</a></li>
+            </ul>
+        </header>
+        <form action="" autocomplete="off" class="page-base">
+             <div class="form-content">
+                 <div class="signin-section">
+                    <div class="form-text left-text">
+                        <div class="left-title form-title">
+                            <h2>Welcome Back!</h2>
+                            <p>please sign in to your account to continue</p>
+                        </div>
+                        <div class="left-triggerbox form-trigger">
+                            <p>Don't have an account yet?</p>
+                            <div class="sign-up-trigger"><span>register now!</span></div>
+                        </div>
+                    </div>
+                    <div class="form-box form-sign-in">
+                        <div class="form__prompt">
+                            <input class="form__input" type="text" name="username-in" id="username-in"
+                                placeholder="ex: Ernesto" maxlength="15" autofocus>
+                            <label for="username-in" class="form__subtitle">Username</label>
+                        </div>
+                        <div class="form__prompt form__password">
+                            <input class="form__input input-password" type="password" name="password-in" id="password-in"
+                                placeholder="">
+                            <span class="password-toggle"></span>
+                            <label for="password-in" class="form__subtitle">Password</label>
+                            <a href="#" class="forgot-password">forgot your password?</a>
+                        </div>
+                        <button type="submit" class="sign-in-button">SIGN IN</button>
+                    </div>
+                 </div>
+                 <div class="signup-section">
+                    <div class="form-box form-sign-up">
+                        <div class="form__prompt">
+                            <input class="form__input" type="text" name="username-up" id="username-up"
+                                placeholder="ex: Ernesto" maxlength="15" autofocus>
+                            <label for="username-up" class="form__subtitle">Username</label>
+                        </div>
+                        <div class="form__prompt">
+                            <input class="form__input" type="email" name="email" id="email"
+                                placeholder="ex: salim.ernest17@gmail.com">
+                            <label for="email" class="form__subtitle">Email</label>
+                        </div>
+                        <div class="form__prompt form__password">
+                            <input class="form__input input-password" type="password" name="password-up" id="password-up"
+                                placeholder="">
+                            <span class="password-toggle"></span>
+                            <label for="password-up" class="form__subtitle">Password</label>
+                        </div>
+                        <div class="gender-and-age">
+                            <div class="form__prompt form__sex">
+                                <div class="form__selection">
+                                    <div class="sex-radio">
+                                        <input class="form__radio" type="radio" name="sex" id="male" value="male">
+                                        <label for="male">MALE</label>
+                                    </div>
+                                    <div class="sex-radio">
+                                        <input class="form__radio" type="radio" name="sex" id="female" value="female">
+                                        <label for="female">FEMALE</label>
+                                    </div>
+                                </div>
+                                <label class="form__subtitle">Sex</label>
+                            </div>
+                            <div class="form__prompt form__age">
+                                <input class="form__input" type="text" name="age" id="age"
+                                placeholder="ex: 18" maxlength="15" autofocus>
+                                <label for="age" class="form__subtitle">Age</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="sign-up-button">SIGN UP</button>
+                    </div>
+                    <div class="form-text right-text">
+                        <div class="right-title form-title">
+                            <h2>Hello There!</h2>
+                            <p>please create an account before joining our <br> wonderful community!</p>
+                        </div>
+                        <div class="right-triggerbox form-trigger">
+                            <p>Already have an account?</p>
+                            <div class="sign-in-trigger"><span>log in now!</span></div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+        </form>
+    </div>
+<script src="./login.js"></script>
+</body>
+</html>
