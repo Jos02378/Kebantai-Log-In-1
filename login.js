@@ -3,7 +3,7 @@ let formPassword = document.querySelectorAll('.input-password')
 
 for (let i = 0; i < passwordToggle.length; i++) {
     passwordToggle[i].addEventListener('click', () => {
-        if(formPassword[i].type === 'password') {
+        if (formPassword[i].type === 'password') {
             formPassword[i].type = 'text';
             passwordToggle[i].style.background = 'url(./images/password-unhide-active.svg)';
             passwordToggle[i].style['background-size'] = 'cover';
@@ -40,4 +40,12 @@ function toggleMenu() {
     var navigation = document.querySelector('.navigation');
     menuToggle.classList.toggle('active');
     navigation.classList.toggle('active');
-  }
+}
+
+const age = document.getElementById("age");
+
+age.oninput = function () {
+    if (this.value.length > 2) {
+        this.value = this.value.slice(0, 2);
+    }
+}
