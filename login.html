@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./login.css">
     <title>Log in - Kebantai</title>
 </head>
+
 <body>
     <div class="wrapper">
         <header class="page-header">
@@ -20,8 +22,8 @@
             </ul>
         </header>
         <form action="" autocomplete="off" class="page-base">
-             <div class="form-content">
-                 <div class="signin-section">
+            <div class="form-content">
+                <div class="signin-section">
                     <div class="form-text left-text">
                         <div class="left-title form-title">
                             <h2>Welcome Back!</h2>
@@ -39,16 +41,16 @@
                             <label for="username-in" class="form__subtitle">Username</label>
                         </div>
                         <div class="form__prompt form__password">
-                            <input class="form__input input-password" type="password" name="password-in" id="password-in"
-                                placeholder="">
+                            <input class="form__input input-password" type="password" name="password-in"
+                                id="password-in" placeholder="">
                             <span class="password-toggle"></span>
                             <label for="password-in" class="form__subtitle">Password</label>
                             <a href="#" class="forgot-password">forgot your password?</a>
                         </div>
                         <button type="submit" class="sign-in-button">SIGN IN</button>
                     </div>
-                 </div>
-                 <div class="signup-section">
+                </div>
+                <div class="signup-section">
                     <div class="form-box form-sign-up">
                         <div class="form__prompt">
                             <input class="form__input" type="text" name="username-up" id="username-up"
@@ -61,8 +63,8 @@
                             <label for="email" class="form__subtitle">Email</label>
                         </div>
                         <div class="form__prompt form__password">
-                            <input class="form__input input-password" type="password" name="password-up" id="password-up"
-                                placeholder="">
+                            <input class="form__input input-password" type="password" name="password-up"
+                                id="password-up" placeholder="">
                             <span class="password-toggle"></span>
                             <label for="password-up" class="form__subtitle">Password</label>
                         </div>
@@ -81,8 +83,8 @@
                                 <label class="form__subtitle">Sex</label>
                             </div>
                             <div class="form__prompt form__age">
-                                <input class="form__input" type="text" name="age" id="age"
-                                placeholder="ex: 18" maxlength="15" autofocus>
+                                <input class="form__input" type="number" name="age" id="age" placeholder="ex: 18"
+                                    min="15" max="100" autofocus>
                                 <label for="age" class="form__subtitle">Age</label>
                             </div>
                         </div>
@@ -98,10 +100,11 @@
                             <div class="sign-in-trigger"><span>log in now!</span></div>
                         </div>
                     </div>
-                 </div>
-             </div>
+                </div>
+            </div>
         </form>
     </div>
-<script src="./login.js"></script>
+    <script src="./login.js"></script>
 </body>
+
 </html>
