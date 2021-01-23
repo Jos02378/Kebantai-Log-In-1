@@ -190,7 +190,6 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else {
-
         //Sign up the user
         auth.createUserWithEmailAndPassword(email_signup.value, password_signup.value).catch((error) => {
             var errorCode = error.code;
@@ -198,6 +197,7 @@ signupButton.addEventListener("click", (e) => {
             window.alert("Error: " + errorMessage);
         });
 
+        // Add data to firestore
         db.collection('account').add({
             username: username_signup.value,
             sex: sex_value,
@@ -244,7 +244,25 @@ signinButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else {
-        alert("success");
+        // LOG IN THE USER
+        firebase.auth().signInWithEmailAndPassword(email_signin.value, password_signin.value).catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error: " + errorMessage);
+        });
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                // window.location.replace("main.html");
+                console.log("You Are loged in")
+
+            } else {
+                // No user is signed in.
+            }
+        });
+
+        // RESET THE INPUT VALUES
         email_signin.value = "";
         password_signin.value = "";
         errorBox.style.transform = "scale(0.01)";
@@ -259,73 +277,6 @@ signinButton.addEventListener("click", (e) => {
 /* 
 // FIREBASE
 */
-
-// document.querySelector(".page-base").addEventListener("submit", submitAccount);
-let contactInfo = firebase.database().ref("Account");
-
-//CREATE USER 
-// const signupForm = document.querySelector(".page-base");
-// signupForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-
-//     //get user info
-//     const email = signupForm["signup_email"].value;
-//     const pass = signupForm["signup_pass"].value;
-
-//     //Sign up the user
-//     auth.createUserWithEmailAndPassword(email, pass).catch((error) => {
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
-//         window.alert("Error: " + errorMessage);
-//     });
-
-//     pass = true;
-// })
-
-// function submitAccount(e) {
-//     e.preventDefault();
-
-//     // get input values
-//     let name = document.querySelector(".name").value;
-
-//     if (pass) {
-//         saveContactInfoLogin(name);
-//     } else {
-//         pass = false;
-//     }
-// }
-
-// save info to firebase
-// function saveContactInfoLogin(name, sex) {
-//     db.collection('account').add({
-//         username: name,
-//         sex: sex,
-//         matches_created_join: [],
-//     })
-// }
-
-// //Save data to Firestore
-// signupForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-
-//     db.collection('account').add({
-//         username: signupForm.name.value,
-//         email: signupForm.signup_email.value,
-//         password: signupForm.signup_pass.value
-//     })
-// })
-
-// LOGIN CODE
-
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         // User is signed in.
-//         window.location.replace("main.html");
-
-//     } else {
-//         // No user is signed in.
-//     }
-// });
 
 // Function login
 
