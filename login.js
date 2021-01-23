@@ -137,7 +137,7 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (sex_value == "") {
-        error_text.innerHTML = "Please specify your gender.";
+        error_text.innerHTML = "Please specify your sex.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
