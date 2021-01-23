@@ -31,12 +31,22 @@ signupTrigger.addEventListener('click', () => {
     page.classList.add('page-alter');
     page.style.animation = "backgroundChanger1 1s ease-in-out forwards";
     error.style.display = "none";
+    username_signup.value = "";
+    email_signup.value = "";
+    password_signup.value = "";
+    sex_value = "";
+    sex_options.forEach(option => {
+        option.querySelector("input").checked = false;
+    })
+    age_signup.value = "";
 });
 
 signinTrigger.addEventListener('click', () => {
     page.classList.remove('page-alter');
     page.style.animation = "backgroundChanger2 1s ease-in-out forwards";
     error.style.display = "none";
+    email_signin.value = "";
+    password_signin.value = "";
 });
 
 // MENU TOGGLE
@@ -58,7 +68,8 @@ age.oninput = function () {
 
 // ERROR HANDLING
 let signinButton = document.querySelector(".sign-in-button");
-
+let email_signin = document.querySelector("#email_signin");
+let password_signin = document.querySelector("#password-in");
 
 let signupButton = document.querySelector(".sign-up-button");
 let username_signup = document.querySelector("#username-up");
@@ -72,7 +83,6 @@ let sex_value = "";
 sex_options.forEach(option => {
     option.addEventListener('click', () => {
         sex_value = option.querySelector("input").value;
-        console.log(sex_value);
     })
 })
 
@@ -95,9 +105,7 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-function validate() {
-    const email = email_signup.value;
-
+function validate(email) {
     if (validateEmail(email)) {
         return true;
     } else {
@@ -105,11 +113,12 @@ function validate() {
     }
 }
 
+// SIGNUP BUTTON
 
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
 
-    let email_validation = validate();
+    let email_validation = validate(email_signup.value);
 
     if (username_signup.value == "") {
         error_text.innerHTML = "Please specify your username.";
@@ -169,10 +178,35 @@ signupButton.addEventListener("click", (e) => {
     }
 })
 
-// $(document).keypress(
-//     function (event) {
-//         if (event.which == '13') {
-//             event.preventDefault();
-//             return false;
-//         }
-//     });
+// SIGNIN BUTTON
+signinButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let email_validation = validate(email_signin.value);
+
+    if (email_signin.value == "") {
+        error_text.innerHTML = "Please specify your username.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (email_validation == false) {
+        error_text.innerHTML = "Please enter a valid email.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (password_signin.value == "") {
+        error_text.innerHTML = "Please specify your password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else {
+        alert("success");
+        email_signin.value = "";
+        password_signin.value = "";
+        errorBox.style.transform = "scale(0.01)";
+        errorBox.style.opacity = "0";
+        if (errorBox.style.opacity === "0") {
+            errorBox.style.display = "none";
+        }
+    }
+})
