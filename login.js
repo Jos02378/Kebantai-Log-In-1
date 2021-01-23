@@ -112,12 +112,12 @@ signupButton.addEventListener("click", (e) => {
     let email_validation = validate();
 
     if (username_signup.value == "") {
-        error_text.innerHTML = "Please fill in the username.";
+        error_text.innerHTML = "Please specify your username.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (email_signup.value == "") {
-        error_text.innerHTML = "Please fill in the email.";
+        error_text.innerHTML = "Please specify your email.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -132,22 +132,22 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (password_signup.value.length < 6) {
-        error_text.innerHTML = "The password must at lease be 6 characters.";
+        error_text.innerHTML = "Your password must at least be 6 characters.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (sex_value == "") {
-        error_text.innerHTML = "Please choose a sex";
+        error_text.innerHTML = "Please specify your gender.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (age_signup.value.length == 0) {
-        error_text.innerHTML = "Please fill in your age.";
+        error_text.innerHTML = "Please specify your age.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (age_signup.value < 8) {
-        error_text.innerHTML = "Sorry, you are too young";
+        error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -168,3 +168,11 @@ signupButton.addEventListener("click", (e) => {
         }
     }
 })
+
+// $(document).keypress(
+//     function (event) {
+//         if (event.which == '13') {
+//             event.preventDefault();
+//             return false;
+//         }
+//     });
