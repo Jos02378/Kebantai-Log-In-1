@@ -1,3 +1,27 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyCVQiH2DSjYOiRrsmgaSRTObEWkGpHm1sA",
+    authDomain: "kebantai2020.firebaseapp.com",
+    databaseURL: "https://kebantai2020-default-rtdb.firebaseio.com",
+    projectId: "kebantai2020",
+    storageBucket: "kebantai2020.appspot.com",
+    messagingSenderId: "290266641346",
+    appId: "1:290266641346:web:85b99043fe87f7795a1c5b",
+    measurementId: "G-M3H7QJBJGQ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+//Initialize Firestore
+const db = firebase.firestore();
+db.settings({
+    timestampsInSnapshots: true
+});
+
+//Initialize Authentication
+const auth = firebase.auth();
+
 // PASSWORD INPUT HANDLING
 let passwordToggle = document.querySelectorAll('.password-toggle');
 let formPassword = document.querySelectorAll('.input-password')
@@ -125,6 +149,11 @@ signupButton.addEventListener("click", (e) => {
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
+    } else if (username_signup.value.length < 6) {
+        error_text.innerHTML = "Your username must at least be 6 characters.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
     } else if (email_signup.value == "") {
         error_text.innerHTML = "Please specify your email.";
         error.style.display = "block";
@@ -161,7 +190,22 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else {
-        alert("success");
+
+        //Sign up the user
+        auth.createUserWithEmailAndPassword(email_signup.value, password_signup.value).catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error: " + errorMessage);
+        });
+
+        db.collection('account').add({
+            username: username_signup.value,
+            sex: sex_value,
+            age: age_signup.value,
+            matches_created_join: [],
+        })
+
+        // RESET ALL INPUT VALUES
         username_signup.value = "";
         email_signup.value = "";
         password_signup.value = "";
@@ -210,3 +254,106 @@ signinButton.addEventListener("click", (e) => {
         }
     }
 })
+
+
+/* 
+// FIREBASE
+*/
+
+// document.querySelector(".page-base").addEventListener("submit", submitAccount);
+let contactInfo = firebase.database().ref("Account");
+
+//CREATE USER 
+// const signupForm = document.querySelector(".page-base");
+// signupForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+
+//     //get user info
+//     const email = signupForm["signup_email"].value;
+//     const pass = signupForm["signup_pass"].value;
+
+//     //Sign up the user
+//     auth.createUserWithEmailAndPassword(email, pass).catch((error) => {
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         window.alert("Error: " + errorMessage);
+//     });
+
+//     pass = true;
+// })
+
+// function submitAccount(e) {
+//     e.preventDefault();
+
+//     // get input values
+//     let name = document.querySelector(".name").value;
+
+//     if (pass) {
+//         saveContactInfoLogin(name);
+//     } else {
+//         pass = false;
+//     }
+// }
+
+// save info to firebase
+// function saveContactInfoLogin(name, sex) {
+//     db.collection('account').add({
+//         username: name,
+//         sex: sex,
+//         matches_created_join: [],
+//     })
+// }
+
+// //Save data to Firestore
+// signupForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+
+//     db.collection('account').add({
+//         username: signupForm.name.value,
+//         email: signupForm.signup_email.value,
+//         password: signupForm.signup_pass.value
+//     })
+// })
+
+// LOGIN CODE
+
+// firebase.auth().onAuthStateChanged(function (user) {
+//     if (user) {
+//         // User is signed in.
+//         window.location.replace("main.html");
+
+//     } else {
+//         // No user is signed in.
+//     }
+// });
+
+// Function login
+
+// const loginForm = document.querySelector(".sign-in-form");
+// loginForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+
+//     // Get user info
+//     var userEmail = document.getElementById("email_field").value;
+//     var userpass = document.getElementById("password_field").value;
+
+//     firebase.auth().signInWithEmailAndPassword(userEmail, userpass).catch((error) => {
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         window.alert("Error: " + errorMessage);
+//     });
+
+// })
+
+//LOGOUT FUNCTION
+// function logout() {
+//     firebase.auth().signOut().then(function () {
+//         // Sign-out successful. 
+//         window.location.replace("index.html");
+//     }).catch(function (error) {
+//         // An error happened.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         window.alert("Error: " + errorMessage);
+//     });
+// }
