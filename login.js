@@ -165,7 +165,7 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (password_signup.value.length == 0) {
-        error_text.innerHTML = "Please fill in the password";
+        error_text.innerHTML = "Please fill in the password.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -185,7 +185,7 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (age_signup.value < 8) {
-        error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site";
+        error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
