@@ -1,3 +1,27 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyCVQiH2DSjYOiRrsmgaSRTObEWkGpHm1sA",
+    authDomain: "kebantai2020.firebaseapp.com",
+    databaseURL: "https://kebantai2020-default-rtdb.firebaseio.com",
+    projectId: "kebantai2020",
+    storageBucket: "kebantai2020.appspot.com",
+    messagingSenderId: "290266641346",
+    appId: "1:290266641346:web:85b99043fe87f7795a1c5b",
+    measurementId: "G-M3H7QJBJGQ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+//Initialize Firestore
+const db = firebase.firestore();
+db.settings({
+    timestampsInSnapshots: true
+});
+
+//Initialize Authentication
+const auth = firebase.auth();
+
 // PASSWORD INPUT HANDLING
 let passwordToggle = document.querySelectorAll('.password-toggle');
 let formPassword = document.querySelectorAll('.input-password')
@@ -31,12 +55,22 @@ signupTrigger.addEventListener('click', () => {
     page.classList.add('page-alter');
     page.style.animation = "backgroundChanger1 1s ease-in-out forwards";
     error.style.display = "none";
+    username_signup.value = "";
+    email_signup.value = "";
+    password_signup.value = "";
+    sex_value = "";
+    sex_options.forEach(option => {
+        option.querySelector("input").checked = false;
+    })
+    age_signup.value = "";
 });
 
 signinTrigger.addEventListener('click', () => {
     page.classList.remove('page-alter');
     page.style.animation = "backgroundChanger2 1s ease-in-out forwards";
     error.style.display = "none";
+    email_signin.value = "";
+    password_signin.value = "";
 });
 
 // MENU TOGGLE
@@ -58,7 +92,8 @@ age.oninput = function () {
 
 // ERROR HANDLING
 let signinButton = document.querySelector(".sign-in-button");
-
+let email_signin = document.querySelector("#email_signin");
+let password_signin = document.querySelector("#password-in");
 
 let signupButton = document.querySelector(".sign-up-button");
 let username_signup = document.querySelector("#username-up");
@@ -72,7 +107,6 @@ let sex_value = "";
 sex_options.forEach(option => {
     option.addEventListener('click', () => {
         sex_value = option.querySelector("input").value;
-        console.log(sex_value);
     })
 })
 
@@ -95,9 +129,7 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-function validate() {
-    const email = email_signup.value;
-
+function validate(email) {
     if (validateEmail(email)) {
         return true;
     } else {
@@ -105,14 +137,32 @@ function validate() {
     }
 }
 
+// CHECK WHITESPACE
+function hasWhiteSpace(s) {
+    return s.indexOf(' ') >= 0;
+}
+
+// SIGNUP BUTTON
 
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
 
-    let email_validation = validate();
+    let check_whitespace_username = hasWhiteSpace(username_signup.value);
+    let check_whitespace_password = hasWhiteSpace(password_signup.value);
+    let email_validation = validate(email_signup.value);
 
     if (username_signup.value == "") {
         error_text.innerHTML = "Please specify your username.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (username_signup.value.length < 6) {
+        error_text.innerHTML = "Your username must at least be 6 characters.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_username) {
+        error_text.innerHTML = "Your username must not contain any space.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -127,7 +177,12 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (password_signup.value.length == 0) {
-        error_text.innerHTML = "Please fill in the password";
+        error_text.innerHTML = "Please fill in the password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_password) {
+        error_text.innerHTML = "Your password must not contain any space.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -147,12 +202,28 @@ signupButton.addEventListener("click", (e) => {
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else if (age_signup.value < 8) {
-        error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site";
+        error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
     } else {
-        alert("success");
+        //Sign up the user
+        let email_signup_trimmed = email_signup.value.trim();
+        auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error: " + errorMessage);
+        });
+
+        // Add data to firestore
+        db.collection('account').add({
+            username: username_signup.value,
+            sex: sex_value,
+            age: age_signup.value,
+            matches_created_join: [],
+        })
+
+        // RESET ALL INPUT VALUES
         username_signup.value = "";
         email_signup.value = "";
         password_signup.value = "";
@@ -169,10 +240,97 @@ signupButton.addEventListener("click", (e) => {
     }
 })
 
-// $(document).keypress(
-//     function (event) {
-//         if (event.which == '13') {
-//             event.preventDefault();
-//             return false;
-//         }
+// SIGNIN BUTTON
+signinButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let email_validation = validate(email_signin.value);
+    let check_whitespace_password = hasWhiteSpace(password_signin.value);
+
+    if (email_signin.value == "") {
+        error_text.innerHTML = "Please enter your email.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (email_validation == false) {
+        error_text.innerHTML = "Please enter a valid email.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (password_signin.value == "") {
+        error_text.innerHTML = "Please specify your password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_password) {
+        error_text.innerHTML = "Please enter a valid password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else {
+        // LOG IN THE USER
+        let email_signin_trimmed = email_signin.value.trim();
+
+        firebase.auth().signInWithEmailAndPassword(email_signin_trimmed, password_signin.value).catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error: " + errorMessage);
+        });
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                // window.location.replace("main.html");
+                console.log("You Are loged in")
+
+            } else {
+                // No user is signed in.
+            }
+        });
+
+        // RESET THE INPUT VALUES
+        email_signin.value = "";
+        password_signin.value = "";
+        errorBox.style.transform = "scale(0.01)";
+        errorBox.style.opacity = "0";
+        if (errorBox.style.opacity === "0") {
+            errorBox.style.display = "none";
+        }
+    }
+})
+
+
+/* 
+// FIREBASE
+*/
+
+// Function login
+
+// const loginForm = document.querySelector(".sign-in-form");
+// loginForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+
+//     // Get user info
+//     var userEmail = document.getElementById("email_field").value;
+//     var userpass = document.getElementById("password_field").value;
+
+//     firebase.auth().signInWithEmailAndPassword(userEmail, userpass).catch((error) => {
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         window.alert("Error: " + errorMessage);
 //     });
+
+// })
+
+//LOGOUT FUNCTION
+// function logout() {
+//     firebase.auth().signOut().then(function () {
+//         // Sign-out successful. 
+//         window.location.replace("index.html");
+//     }).catch(function (error) {
+//         // An error happened.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         window.alert("Error: " + errorMessage);
+//     });
+// }

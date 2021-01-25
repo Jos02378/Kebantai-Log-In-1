@@ -463,7 +463,7 @@ button[type="submit"]:hover {
 }
 
 .error {
-  /* display: none; */
+  display: none;
   position: relative;
   margin-bottom: 2vh;
 
