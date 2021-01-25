@@ -466,10 +466,6 @@ button[type="submit"]:hover {
   display: none;
   position: relative;
   margin-bottom: 2vh;
-
-  transform-origin: right;
-  transition: transform 500ms ease-in-out, opacity 100ms ease 400ms,
-    display 100ms ease 500ms;
 }
 
 .error-box {
