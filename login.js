@@ -137,11 +137,18 @@ function validate(email) {
     }
 }
 
+// CHECK WHITESPACE
+function hasWhiteSpace(s) {
+    return s.indexOf(' ') >= 0;
+}
+
 // SIGNUP BUTTON
 
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
 
+    let check_whitespace_username = hasWhiteSpace(username_signup.value);
+    let check_whitespace_password = hasWhiteSpace(password_signup.value);
     let email_validation = validate(email_signup.value);
 
     if (username_signup.value == "") {
@@ -151,6 +158,11 @@ signupButton.addEventListener("click", (e) => {
         errorBox.style.transform = "scale(1)";
     } else if (username_signup.value.length < 6) {
         error_text.innerHTML = "Your username must at least be 6 characters.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_username) {
+        error_text.innerHTML = "Your username must not contain any space.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -166,6 +178,11 @@ signupButton.addEventListener("click", (e) => {
         errorBox.style.transform = "scale(1)";
     } else if (password_signup.value.length == 0) {
         error_text.innerHTML = "Please fill in the password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_password) {
+        error_text.innerHTML = "Your password must not contain any space.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -191,7 +208,8 @@ signupButton.addEventListener("click", (e) => {
         errorBox.style.transform = "scale(1)";
     } else {
         //Sign up the user
-        auth.createUserWithEmailAndPassword(email_signup.value, password_signup.value).catch((error) => {
+        let email_signup_trimmed = email_signup.value.trim();
+        auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             window.alert("Error: " + errorMessage);
@@ -227,9 +245,10 @@ signinButton.addEventListener("click", (e) => {
     e.preventDefault();
 
     let email_validation = validate(email_signin.value);
+    let check_whitespace_password = hasWhiteSpace(password_signin.value);
 
     if (email_signin.value == "") {
-        error_text.innerHTML = "Please specify your username.";
+        error_text.innerHTML = "Please enter your email.";
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
@@ -243,9 +262,16 @@ signinButton.addEventListener("click", (e) => {
         error.style.display = "block";
         error.style.opacity = "1";
         errorBox.style.transform = "scale(1)";
+    } else if (check_whitespace_password) {
+        error_text.innerHTML = "Please enter a valid password.";
+        error.style.display = "block";
+        error.style.opacity = "1";
+        errorBox.style.transform = "scale(1)";
     } else {
         // LOG IN THE USER
-        firebase.auth().signInWithEmailAndPassword(email_signin.value, password_signin.value).catch((error) => {
+        let email_signin_trimmed = email_signin.value.trim();
+
+        firebase.auth().signInWithEmailAndPassword(email_signin_trimmed, password_signin.value).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             window.alert("Error: " + errorMessage);
