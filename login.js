@@ -210,6 +210,8 @@ signupButton.addEventListener("click", (e) => {
         //Sign up the user
         let email_signup_trimmed = email_signup.value.trim();
         auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).then(function () {
+
+            //SEND VERIFICATION EMAIL
             var user = firebase.auth().currentUser;
 
             user.sendEmailVerification().then(function () {
