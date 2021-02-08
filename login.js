@@ -319,6 +319,26 @@ signinButton.addEventListener("click", (e) => {
     }
 })
 
+// FORGOT PASSWORD
+
+let forgot_password = document.querySelector(".forgot-password");
+
+forgot_password.addEventListener("click", () => {
+    // REDIRECT KE PAGE LAIN
+})
+
+// KIRIM RESET PASSWORD EMAIL
+
+// var auth = firebase.auth();
+// var emailAddress = "user@example.com";
+
+// auth.sendPasswordResetEmail(emailAddress).then(function () {
+//     // Email sent.
+// }).catch(function (error) {
+//     // An error happened.
+// });
+
+//////////
 
 /* 
 // FIREBASE
