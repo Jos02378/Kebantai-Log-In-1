@@ -327,18 +327,39 @@ forgot_password.addEventListener("click", () => {
     // REDIRECT KE PAGE LAIN
 })
 
-// KIRIM RESET PASSWORD EMAIL
+let reset_password = document.querySelector(".reset_password");
+reset_password.addEventListener("click", () => {
+    // KIRIM RESET PASSWORD EMAIL
+    var emailAddress = "haryantojoseph@gmail.com";
 
-// var auth = firebase.auth();
-// var emailAddress = "user@example.com";
+    auth.sendPasswordResetEmail(emailAddress).then(function () {
+        // Email sent.
+        console.log("RESET-PASSWORD EMAIL SENT");
+    }).catch(function (error) {
+        // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error: " + errorMessage);
+    });
+})
 
-// auth.sendPasswordResetEmail(emailAddress).then(function () {
-//     // Email sent.
-// }).catch(function (error) {
-//     // An error happened.
-// });
+let resend_verification = document.querySelector(".resend_verification");
+resend_verification.addEventListener("click", () => {
 
-//////////
+    var user = firebase.auth().currentUser;
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+        console.log("Email verification already sent");
+
+    }).catch(function (error) {
+        // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error: " + errorMessage);
+    })
+})
+
+
 
 /* 
 // FIREBASE
