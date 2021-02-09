@@ -209,11 +209,29 @@ signupButton.addEventListener("click", (e) => {
     } else {
         //Sign up the user
         let email_signup_trimmed = email_signup.value.trim();
-        auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).catch((error) => {
+        auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).then(function () {
+
+            //SEND VERIFICATION EMAIL
+            var user = firebase.auth().currentUser;
+
+            user.sendEmailVerification().then(function () {
+                // Email sent.
+                console.log("Email verification already sent");
+
+            }).catch(function (error) {
+                // An error happened.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("Error: " + errorMessage);
+            })
+
+        }).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             window.alert("Error: " + errorMessage);
         });
+
+
 
         // Add data to firestore
         db.collection('account').add({
@@ -281,7 +299,9 @@ signinButton.addEventListener("click", (e) => {
             if (user) {
                 // User is signed in.
                 // window.location.replace("main.html");
-                console.log("You Are loged in")
+                var user_email_id = user.email;
+                var user_email_verified = user.emailVerified;
+                console.log(user_email_id, user_email_verified);
 
             } else {
                 // No user is signed in.
@@ -298,6 +318,47 @@ signinButton.addEventListener("click", (e) => {
         }
     }
 })
+
+// FORGOT PASSWORD
+
+let forgot_password = document.querySelector(".forgot-password");
+
+forgot_password.addEventListener("click", () => {
+    // REDIRECT KE PAGE LAIN
+})
+
+let reset_password = document.querySelector(".reset_password");
+reset_password.addEventListener("click", () => {
+    // KIRIM RESET PASSWORD EMAIL
+    var emailAddress = "haryantojoseph@gmail.com";
+
+    auth.sendPasswordResetEmail(emailAddress).then(function () {
+        // Email sent.
+        console.log("RESET-PASSWORD EMAIL SENT");
+    }).catch(function (error) {
+        // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error: " + errorMessage);
+    });
+})
+
+let resend_verification = document.querySelector(".resend_verification");
+resend_verification.addEventListener("click", () => {
+
+    var user = firebase.auth().currentUser;
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+        console.log("Email verification already sent");
+
+    }).catch(function (error) {
+        // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error: " + errorMessage);
+    })
+})
+
 
 
 /* 
