@@ -223,12 +223,12 @@ header.page-header ul li a:hover {
   content: "";
   background: #febc2f;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 120%;
+  height: 120%;
   left: 0;
   top: 0;
   transform: translateX(-100%);
-  transition: transform 0.6s;
+  transition: transform 0.7s;
 
   z-index: 1;
 }
@@ -291,10 +291,12 @@ header.page-header ul li a:hover {
 .form__subtitle {
   color: #acacac;
   align-self: flex-start;
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-style: italic;
   margin-left: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   order: -1;
   transition: all 0.3s;
 }
@@ -304,10 +306,10 @@ header.page-header ul li a:hover {
   min-width: 420px;
   height: 40px;
   padding: 20px;
-  border: 1px solid #19192b;
+  border: 1px solid #151525;
   border-radius: 4px;
   font-size: 13px;
-  background: #19192b;
+  background: #151525;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); */
   color: white;
   outline: none;
@@ -338,13 +340,13 @@ header.page-header ul li a:hover {
   height: 20px;
   position: absolute;
   right: 18px;
-  top: 38px;
+  top: 35px;
   cursor: pointer;
 }
 
 .forgot-password {
   font-size: 11px;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: -0.3px;
   color: #909090;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
@@ -379,7 +381,7 @@ header.page-header ul li a:hover {
 .sex-radio {
   width: 90px;
   height: 42px;
-  background: #19192b;
+  background: #151525;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); */
   border-radius: 4px;
   overflow: hidden;
