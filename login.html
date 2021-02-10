@@ -10,17 +10,32 @@
 
 <body>
     <div class="wrapper">
+        <div class="dark-background"></div>
         <header class="page-header">
-            <div id="logo">
-                <a href="#">KEBANTAI</a>
+            <div class="header-menu">
+                <div class="header-logo">KEBANTAI</div>
             </div>
-            <div class="toggle" onclick="toggleMenu();"></div>
-            <ul class="navigation">
-                <li><a href="#" class="reset_password">WHY KEBANTAI?</a></li>
-                <li><a href="#" class="resend_verification">ABOUT US</a></li>
-                <li><a href="#">CONTACT</a></li>
-                <li><a href="#" class="active-page">LOG IN</a></li>
-            </ul>
+            <div class="navigation-toggle">
+                <img class="navigation-toggle-icon" src="./images/Header images/burger-icon.svg" alt="">
+            </div>
+            <div class="navigation right-header-tab">
+                <a href="#" class="right-tab-options">
+                    <span class="right-tab-icon"><img src="./images/Header images/why.svg" alt=""></span>
+                    <p class="right-tab-name">Why Kebantai?</p>
+                </a>
+                <a href="#" class="right-tab-options">
+                    <span class="right-tab-icon"><img src="./images/Header images/about.svg" alt=""></span>
+                    <p class="right-tab-name">About Us</p>
+                </a>
+                <a href="#" class="right-tab-options">
+                    <span class="right-tab-icon"><img src="./images/Header images/contact.svg"alt=""></span>
+                    <p class="right-tab-name">Contact</p>
+                </a>
+                <a href="#" class="right-tab-options active-page">
+                    <span class="right-tab-icon"><img src="./images/Header images/login.svg"alt=""></span>
+                    <p class="right-tab-name">Log In</p>
+                </a>
+            </div>
         </header>
         <form action="" autocomplete="off" class="page-base">
             <div class="form-content">
