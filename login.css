@@ -261,7 +261,9 @@ a {
 
 .form-title h2 {
   font-size: 50px;
-  font-weight: 550;
+  font-weight: 650;
+  font-style: italic;
+  text-transform: uppercase;
   text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
   letter-spacing: 0.7px;
   line-height: 60px;
@@ -269,7 +271,7 @@ a {
 }
 
 .form-title p {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 300;
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.4);
   margin-top: 10px;
@@ -283,7 +285,7 @@ a {
   border-radius: 10px;
   width: 300px;
   height: 120px;
-  margin-top: 20px;
+  margin-top: 40px;
 
   display: flex;
   flex-direction: column;
@@ -627,6 +629,114 @@ button[type="submit"]:hover {
   margin-left: 40px;
 }
 
+.modal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(4, 0, 27, 0.85);
+
+  z-index: 30;
+}
+
+.modal-box {
+  width: 450px;
+  min-height: 160px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #2a2c42;
+  border-radius: 7px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+  padding: 25px 0px 0px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  color: #ff3b3b;
+  font-size: 40px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  transform: scale(1.3) rotate(45deg);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+.modal-title {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.buttons {
+  width: 100%;
+  height: 80px;
+  background: #212238;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  outline: none;
+  width: 130px;
+  height: 40px;
+  color: #292a45;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  display: grid;
+  place-items: center;
+}
+
+.yes-password {
+  border: none;
+  background: #8872ff;
+  margin-right: 10px;
+}
+
+.no-password {
+  border: 1px solid #fc3b3b;
+  color: #fc3b3b;
+  background: transparent;
+  margin-left: 10px;
+}
+
+.yes-password:hover {
+  box-shadow: 0px 0px 15px rgba(136, 114, 252, 0.4);
+}
+
+.no-password:hover {
+  background: #fc3b3b;
+  color: #292a45;
+  box-shadow: 0px 0px 15px rgba(252, 59, 59, 0.5);
+}
+
+.modal-check .modal-box {
+  justify-content: center;
+  padding: 0;
+}
+
 @media (max-width: 1080px) {
   .wrapper {
     overflow-y: scroll;
@@ -964,6 +1074,10 @@ button[type="submit"]:hover {
   .right-tab-icon img {
     width: 20px;
     height: 20px;
+  }
+
+  .form-title h2 {
+    font-size: 30px;
   }
 }
 

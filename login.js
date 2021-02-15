@@ -12,6 +12,35 @@ menuToggle.addEventListener('click', () => {
     darkBackground.classList.add('active');
 });
 
+const rememberPasswordTrigger = document.querySelector('.forgot-password');
+const modalPassword = document.querySelector('.modal-password');
+
+rememberPasswordTrigger.addEventListener('click', () => {
+    modalPassword.style.display = "unset";
+})
+
+let modal = document.querySelectorAll('.modal');
+let modalClose = document.querySelectorAll('.modal-close');
+
+for (let i = 0; i < modalClose.length; i++) {
+    modalClose[i].addEventListener('click', () => {
+      modal[i].style.display = "none";
+    });
+  }
+
+let yesPassword = document.querySelector('.yes-password');
+let modalCheck = document.querySelector('.modal-check');
+let noPassword = document.querySelector('.no-password');
+
+yesPassword.addEventListener('click', () => {
+  modalPassword.style.display = "none";
+  modalCheck.style.display = "unset";
+})
+
+noPassword.addEventListener('click', () => {
+    modalPassword.style.display = "none";
+  })
+
 var firebaseConfig = {
     apiKey: "AIzaSyCVQiH2DSjYOiRrsmgaSRTObEWkGpHm1sA",
     authDomain: "kebantai2020.firebaseapp.com",

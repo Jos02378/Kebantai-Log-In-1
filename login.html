@@ -64,7 +64,7 @@
                                 onkeypress="return event.keyCode != 13;">
                             <label for="password-in" class="form__subtitle">Password</label>
                             <span class="password-toggle"></span>
-                            <a href="#" class="forgot-password">forgot your password?</a>
+                            <div class="forgot-password">forgot your password?</div>
                         </div>
                         <button type="submit" class="sign-in-button">SIGN IN</button>
                     </div>
@@ -137,6 +137,29 @@
                     <p class="error-text">Please enter your username</p>
                 </div>
             </div>
+        </div>
+        <div class="modal modal-password">
+            <form class="modal-box" action="">
+                <div class="modal-close">+</div>
+                <h4 class="modal-title">
+                    Are you sure?
+                </h4>
+                <div class="buttons">
+                    <div class="yes-password button">I AM SURE</div>
+                    <div class="no-password button">NEVER MIND</div>
+                </div>
+            </form>
+        </div>
+        <div class="modal modal-check">
+            <form class="modal-box" action="">
+                <div class="modal-close">+</div>
+                <h4 class="modal-title">
+                    Alrighty Sir
+                </h4>
+                <p class="modal-subtitle">
+                    Then please kindly check your email :D
+                </p>
+            </form>
         </div>
     </div>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
