@@ -961,6 +961,10 @@ button[type="submit"]:hover {
   button[type="submit"] {
     width: 300px;
   }
+
+  .modal-box {
+    width: 340px;
+  }
 }
 
 @media (max-width: 415px) {
@@ -1028,6 +1032,10 @@ button[type="submit"]:hover {
 
   .form__age .form__input {
     width: 90px;
+  }
+
+  .modal-box {
+    width: 320px;
   }
 }
 
