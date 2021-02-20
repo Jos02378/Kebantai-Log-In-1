@@ -53,10 +53,10 @@
                     </div>
                     <div class="form-box form-sign-in">
                         <div class="form__prompt">
-                            <input class="form__input" type="email" name="email_signin" id="email_signin"
-                                placeholder="ex: kebantaicom@gmail.com" maxlength="50"
+                            <input class="form__input" type="email" name="email_in" id="email_in"
+                                placeholder="e.g. kebantaicom@gmail.com" maxlength="50"
                                 onkeypress="return event.keyCode != 13;" autofocus>
-                            <label for="email_signin" class="form__subtitle">Email</label>
+                            <label for="email_in" class="form__subtitle">Email</label>
                         </div>
                         <div class="form__prompt form__password">
                             <input class="form__input input-password" type="password" name="password-in"
@@ -73,15 +73,15 @@
                     <div class="form-box form-sign-up">
                         <div class="form__prompt">
                             <input class="form__input" type="text" name="username-up" id="username-up"
-                                placeholder="ex: Ernesto" maxlength="15" onkeypress="return event.keyCode != 13;"
+                                placeholder="e.g. dannythechad" maxlength="15" onkeypress="return event.keyCode != 13;"
                                 autofocus>
                             <label for="username-up" class="form__subtitle">Username</label>
                         </div>
                         <div class="form__prompt">
-                            <input class="form__input" type="email" name="email" id="email"
+                            <input class="form__input" type="email" name="email-up" id="email-up"
                                 placeholder="ex: kebantaicom@gmail.com" maxlength="50"
                                 onkeypress="return event.keyCode != 13;">
-                            <label for="email" class="form__subtitle">Email</label>
+                            <label for="email-up" class="form__subtitle">Email</label>
                         </div>
                         <div class="form__prompt form__password">
                             <input class="form__input input-password" type="password" name="password-up"
@@ -104,7 +104,7 @@
                                         <label for="female">FEMALE</label>
                                     </div>
                                 </div>
-                                <label class="form__subtitle">Sex</label>
+                                <label class="form__subtitle">Gender</label>
                             </div>
                             <div class="form__prompt form__age">
                                 <input class="form__input" type="number" name="age" id="age" placeholder="ex: 18"
@@ -116,8 +116,8 @@
                     </div>
                     <div class="form-text right-text">
                         <div class="right-title form-title">
-                            <h2>Hello Challengers!</h2>
-                            <p>please register on our platform before<br> you rebound the basketball.</p>
+                            <h2>Hello<br> Challengers!</h2>
+                            <p>please register on our platform<br> before you rebound the basketball.</p>
                         </div>
                         <div class="right-triggerbox form-trigger">
                             <p>Already have an account?</p>
@@ -139,19 +139,33 @@
             </div>
         </div>
         <div class="modal modal-password">
-            <form class="modal-box" action="">
-                <div class="modal-close">+</div>
-                <h4 class="modal-title">
-                    Are you sure?
-                </h4>
+            <form class="modal-box" action="" autocomplete="off">
+                <div class="modal-title">Please reenter your email</div>
+                <div class="form__prompt">
+                    <input class="form__input" type="email" name="email-modal" id="email-modal"
+                        placeholder="e.g. kebantaicom@gmail.com" onkeypress="return event.keyCode != 13;"
+                        autofocus>
+                    <label for="email-modal" class="form__subtitle">EMAIL</label>
+                </div>
                 <div class="buttons">
-                    <div class="yes-password button">I AM SURE</div>
+                    <div class="yes-password button">PROCEED</div>
                     <div class="no-password button">NEVER MIND</div>
                 </div>
             </form>
+            <div class="error-section modal-error-section">
+                <div class="error modal-error">
+                    <div class="error-circle modal-error-circle">
+                        <p class="error-close modal-error-close">+</p>
+                    </div>
+                    <div class="error-box modal-error-box">
+                        <img class="error-icon modal-error-icon" src="./images/Exclamation.svg"></img>
+                        <p class="error-text modal-error-text">Please reenter your email</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal modal-check">
-            <form class="modal-box" action="">
+            <div class="modal-box">
                 <div class="modal-close">+</div>
                 <h4 class="modal-title">
                     Alrighty Sir
@@ -159,7 +173,7 @@
                 <p class="modal-subtitle">
                     Then please kindly check your email :D
                 </p>
-            </form>
+            </div>
         </div>
     </div>
     <!-- The core Firebase JS SDK is always required and must be listed first -->

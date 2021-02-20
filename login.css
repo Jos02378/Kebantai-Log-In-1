@@ -433,7 +433,7 @@ a {
 .password-toggle {
   background: url(./images/password-unhide.svg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -444,13 +444,20 @@ a {
 
 .forgot-password {
   font-size: 11px;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.3px;
   color: #909090;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   margin-top: 5px;
   margin-left: 5px;
   cursor: pointer;
+
+  align-self: flex-start;
+  transition: color 0.4s;
+}
+
+.forgot-password:hover {
+  color: #ffdf9a;
 }
 
 .gender-and-age {
@@ -559,11 +566,11 @@ button[type="submit"]:hover {
   /* align-self: flex-end; */
   bottom: 0;
   right: 20px;
-  z-index: 10;
+  z-index: 40;
 }
 
 .error {
-  display: none;
+  /* display: none; */
   position: relative;
   margin-bottom: 2vh;
 }
@@ -572,6 +579,8 @@ button[type="submit"]:hover {
   height: 60px;
   min-width: 380px;
   border-radius: 7px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   padding: 0px 15px;
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.7);
   position: relative;
@@ -624,7 +633,8 @@ button[type="submit"]:hover {
   position: relative;
   font-size: 16px;
   color: white;
-  font-weight: 400;
+  font-weight: 600;
+  font-style: italic;
   /* text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); */
   margin-left: 40px;
 }
@@ -642,8 +652,8 @@ button[type="submit"]:hover {
 }
 
 .modal-box {
-  width: 450px;
-  min-height: 160px;
+  width: 460px;
+  min-height: 220px;
   position: relative;
   left: 50%;
   top: 50%;
@@ -651,7 +661,7 @@ button[type="submit"]:hover {
   background: #2a2c42;
   border-radius: 7px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
-  padding: 25px 0px 0px;
+  padding: 20px 0px 0px;
   overflow: hidden;
 
   display: flex;
@@ -677,10 +687,18 @@ button[type="submit"]:hover {
 }
 
 .modal-title {
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
-  text-align: center;
+  text-transform: uppercase;
+  color: #acacac;
+  text-align: left;
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  font-weight: 450;
+  color: #acacac;
 }
 
 .buttons {
@@ -711,7 +729,7 @@ button[type="submit"]:hover {
 
 .yes-password {
   border: none;
-  background: #8872ff;
+  background: #ffc833;
   margin-right: 10px;
 }
 
@@ -723,7 +741,7 @@ button[type="submit"]:hover {
 }
 
 .yes-password:hover {
-  box-shadow: 0px 0px 15px rgba(136, 114, 252, 0.4);
+  box-shadow: 0px 0px 15px rgba(254, 188, 47, 0.5);
 }
 
 .no-password:hover {
@@ -733,6 +751,7 @@ button[type="submit"]:hover {
 }
 
 .modal-check .modal-box {
+  min-height: 150px;
   justify-content: center;
   padding: 0;
 }
