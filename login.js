@@ -1,3 +1,43 @@
+let menuToggle = document.querySelector('.navigation-toggle');
+let rightTab = document.querySelector('.right-header-tab');
+let darkBackground = document.querySelector('.dark-background');
+
+darkBackground.addEventListener('click', () => {
+    darkBackground.classList.remove('active');
+    rightTab.classList.remove('active');
+});
+  
+menuToggle.addEventListener('click', () => {
+    rightTab.classList.add('active');
+    darkBackground.classList.add('active');
+});
+
+const rememberPasswordTrigger = document.querySelector('.forgot-password');
+const modalPassword = document.querySelector('.modal-password');
+
+rememberPasswordTrigger.addEventListener('click', () => {
+    modalPassword.style.display = "unset";
+})
+
+let modalCheck = document.querySelector('.modal-check');
+let modalClose = document.querySelector('.modal-close');
+
+modalClose.addEventListener('click', () => {
+    modalCheck.style.display = "none";
+});
+
+let yesPassword = document.querySelector('.yes-password');
+let noPassword = document.querySelector('.no-password');
+
+yesPassword.addEventListener('click', () => {
+  modalPassword.style.display = "none";
+  modalCheck.style.display = "unset";
+})
+
+noPassword.addEventListener('click', () => {
+    modalPassword.style.display = "none";
+  })
+
 var firebaseConfig = {
     apiKey: "AIzaSyCVQiH2DSjYOiRrsmgaSRTObEWkGpHm1sA",
     authDomain: "kebantai2020.firebaseapp.com",
@@ -31,14 +71,14 @@ for (let i = 0; i < passwordToggle.length; i++) {
         if (formPassword[i].type === 'password') {
             formPassword[i].type = 'text';
             passwordToggle[i].style.background = 'url(./images/password-unhide-active.svg)';
-            passwordToggle[i].style['background-size'] = 'cover';
+            passwordToggle[i].style['background-size'] = 'contain';
             passwordToggle[i].style.width = '20px';
             passwordToggle[i].style.height = '20px';
 
         } else {
             formPassword[i].type = 'password';
             passwordToggle[i].style.background = 'url(./images/password-unhide.svg)';
-            passwordToggle[i].style['background-size'] = 'cover';
+            passwordToggle[i].style['background-size'] = 'contain';
             passwordToggle[i].style.width = '20px';
             passwordToggle[i].style.height = '20px';
         }
@@ -92,12 +132,12 @@ age.oninput = function () {
 
 // ERROR HANDLING
 let signinButton = document.querySelector(".sign-in-button");
-let email_signin = document.querySelector("#email_signin");
+let email_signin = document.querySelector("#email_in");
 let password_signin = document.querySelector("#password-in");
 
 let signupButton = document.querySelector(".sign-up-button");
 let username_signup = document.querySelector("#username-up");
-let email_signup = document.querySelector("#email");
+let email_signup = document.querySelector("#email-up");
 let password_signup = document.querySelector("#password-up");
 let age_signup = document.querySelector("#age");
 
@@ -112,16 +152,21 @@ sex_options.forEach(option => {
 
 let error = document.querySelector(".error");
 let error_text = document.querySelector(".error-text");
-let errorClose = document.querySelector('.error-circle');
+let errorClose = document.querySelectorAll('.error-circle');
 let errorBox = document.querySelector('.error');
 
-errorClose.addEventListener('click', () => {
-    errorBox.style.transform = "scale(0.01)";
-    errorBox.style.opacity = "0";
-    if (errorBox.style.opacity === "0") {
+errorClose.forEach((errorCloseBtn) => {
+    errorCloseBtn.addEventListener('click', () => {
         errorBox.style.display = "none";
-    }
-});
+    })
+})
+
+let modalErrorClose = document.querySelector('.modal-error-circle');
+let modalErrorBox = document.querySelector('.modal-error');
+
+modalErrorClose.addEventListener('click', () => {
+    modalErrorBox.style.display = "none";
+})
 
 // VALIDATE EMAIL
 function validateEmail(email) {
@@ -154,58 +199,47 @@ signupButton.addEventListener("click", (e) => {
     if (username_signup.value == "") {
         error_text.innerHTML = "Please specify your username.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (username_signup.value.length < 6) {
         error_text.innerHTML = "Your username must at least be 6 characters.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (check_whitespace_username) {
         error_text.innerHTML = "Your username must not contain any space.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (email_signup.value == "") {
         error_text.innerHTML = "Please specify your email.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (email_validation == false) {
         error_text.innerHTML = "Please enter a valid email.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (password_signup.value.length == 0) {
         error_text.innerHTML = "Please fill in the password.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (check_whitespace_password) {
         error_text.innerHTML = "Your password must not contain any space.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (password_signup.value.length < 6) {
         error_text.innerHTML = "Your password must at least be 6 characters.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (sex_value == "") {
-        error_text.innerHTML = "Please specify your sex.";
+        error_text.innerHTML = "Please specify your gender.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (age_signup.value.length == 0) {
         error_text.innerHTML = "Please specify your age.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (age_signup.value < 8) {
         error_text.innerHTML = "Sorry, you must be at least 8 years old to register on our site.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else {
         //Sign up the user
         let email_signup_trimmed = email_signup.value.trim();
@@ -250,11 +284,8 @@ signupButton.addEventListener("click", (e) => {
             option.querySelector("input").checked = false;
         })
         age_signup.value = "";
-        errorBox.style.transform = "scale(0.01)";
-        errorBox.style.opacity = "0";
-        if (errorBox.style.opacity === "0") {
-            errorBox.style.display = "none";
-        }
+        errorBox.style.display = "none";
+
     }
 })
 
@@ -268,23 +299,19 @@ signinButton.addEventListener("click", (e) => {
     if (email_signin.value == "") {
         error_text.innerHTML = "Please enter your email.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (email_validation == false) {
         error_text.innerHTML = "Please enter a valid email.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (password_signin.value == "") {
         error_text.innerHTML = "Please specify your password.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else if (check_whitespace_password) {
         error_text.innerHTML = "Please enter a valid password.";
         error.style.display = "block";
-        error.style.opacity = "1";
-        errorBox.style.transform = "scale(1)";
+        errorBox.style.display = "flex";
     } else {
         // LOG IN THE USER
         let email_signin_trimmed = email_signin.value.trim();
@@ -311,11 +338,7 @@ signinButton.addEventListener("click", (e) => {
         // RESET THE INPUT VALUES
         email_signin.value = "";
         password_signin.value = "";
-        errorBox.style.transform = "scale(0.01)";
-        errorBox.style.opacity = "0";
-        if (errorBox.style.opacity === "0") {
-            errorBox.style.display = "none";
-        }
+        errorBox.style.display = "none";
     }
 })
 
@@ -358,6 +381,7 @@ resend_verification.addEventListener("click", () => {
         console.log("Error: " + errorMessage);
     })
 })
+
 
 
 
