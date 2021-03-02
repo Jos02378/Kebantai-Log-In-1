@@ -6,7 +6,7 @@ darkBackground.addEventListener('click', () => {
     darkBackground.classList.remove('active');
     rightTab.classList.remove('active');
 });
-  
+
 menuToggle.addEventListener('click', () => {
     rightTab.classList.add('active');
     darkBackground.classList.add('active');
@@ -25,18 +25,6 @@ let modalClose = document.querySelector('.modal-close');
 modalClose.addEventListener('click', () => {
     modalCheck.style.display = "none";
 });
-
-let yesPassword = document.querySelector('.yes-password');
-let noPassword = document.querySelector('.no-password');
-
-yesPassword.addEventListener('click', () => {
-  modalPassword.style.display = "none";
-  modalCheck.style.display = "unset";
-})
-
-noPassword.addEventListener('click', () => {
-    modalPassword.style.display = "none";
-  })
 
 var firebaseConfig = {
     apiKey: "AIzaSyCVQiH2DSjYOiRrsmgaSRTObEWkGpHm1sA",
@@ -188,7 +176,6 @@ function hasWhiteSpace(s) {
 }
 
 // SIGNUP BUTTON
-
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -343,44 +330,65 @@ signinButton.addEventListener("click", (e) => {
 })
 
 // FORGOT PASSWORD
+let form_password_reset = document.querySelector('#email-reset');
+let input_password_reset = form_password_reset.querySelector("input");
 
-let forgot_password = document.querySelector(".forgot-password");
+let noPassword = document.querySelector('.no-password');
 
-forgot_password.addEventListener("click", () => {
-    // REDIRECT KE PAGE LAIN
+noPassword.addEventListener('click', () => {
+    modalPassword.style.display = "none";
+    errorBox.style.display = "none";
+    input_password_reset.value = "";
 })
 
-let reset_password = document.querySelector(".reset_password");
+let reset_password = document.querySelector(".yes-password");
 reset_password.addEventListener("click", () => {
-    // KIRIM RESET PASSWORD EMAIL
-    var emailAddress = "haryantojoseph@gmail.com";
 
-    auth.sendPasswordResetEmail(emailAddress).then(function () {
-        // Email sent.
-        console.log("RESET-PASSWORD EMAIL SENT");
-    }).catch(function (error) {
-        // An error happened.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log("Error: " + errorMessage);
-    });
+    let email_validation = validate(input_password_reset.value);
+
+    if (input_password_reset.value == "") {
+        error_text.innerHTML = "Please specify your email.";
+        error.style.display = "block";
+        errorBox.style.display = "flex";
+    } else if (email_validation == false) {
+        error_text.innerHTML = "Please enter a valid email.";
+        error.style.display = "block";
+        errorBox.style.display = "flex";
+    } else {
+        // KIRIM RESET PASSWORD EMAIL
+        auth.sendPasswordResetEmail(input_password_reset.value).then(function () {
+            // Email sent.
+            console.log("RESET-PASSWORD EMAIL SENT");
+        }).catch(function (error) {
+            // An error happened.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("Error: " + errorMessage);
+        });
+
+        modalPassword.style.display = "none";
+        modalCheck.style.display = "unset";
+        input_password_reset.value = "";
+        errorBox.style.display = "none";
+        console.log(input_password_reset.value);
+    }
 })
 
-let resend_verification = document.querySelector(".resend_verification");
-resend_verification.addEventListener("click", () => {
+// let resend_verification = document.querySelector(".resend_verification");
+// resend_verification.addEventListener("click", () => {
 
-    var user = firebase.auth().currentUser;
-    user.sendEmailVerification().then(function () {
-        // Email sent.
-        console.log("Email verification already sent");
+//     var user = firebase.auth().currentUser;
+//     user.sendEmailVerification().then(function () {
+//         // Email sent.
+//         console.log("Email verification already sent");
 
-    }).catch(function (error) {
-        // An error happened.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log("Error: " + errorMessage);
-    })
-})
+//     }).catch(function (error) {
+//         // An error happened.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         console.log("Error: " + errorMessage);
+//     })
+// })
 
 
 
