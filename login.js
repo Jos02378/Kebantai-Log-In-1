@@ -175,6 +175,12 @@ function hasWhiteSpace(s) {
     return s.indexOf(' ') >= 0;
 }
 
+function show_error(errorMessage) {
+    error_text.innerHTML = errorMessage;
+    error.style.display = "block";
+    errorBox.style.display = "flex";
+}
+
 // SIGNUP BUTTON
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -229,6 +235,7 @@ signupButton.addEventListener("click", (e) => {
         errorBox.style.display = "flex";
     } else {
         //Sign up the user
+
         let email_signup_trimmed = email_signup.value.trim();
         auth.createUserWithEmailAndPassword(email_signup_trimmed, password_signup.value).then(function () {
 
@@ -249,10 +256,10 @@ signupButton.addEventListener("click", (e) => {
         }).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            window.alert("Error: " + errorMessage);
+
+            show_error(errorMessage);
+            // window.alert("Error: " + errorMessage);
         });
-
-
 
         // Add data to firestore
         db.collection('account').add({
@@ -260,19 +267,20 @@ signupButton.addEventListener("click", (e) => {
             sex: sex_value,
             age: age_signup.value,
             matches_created_join: [],
-        })
+        }).then(function () {
+            // RESET ALL INPUT VALUES
+            username_signup.value = "";
+            email_signup.value = "";
+            password_signup.value = "";
+            sex_value = "";
+            sex_options.forEach(option => {
+                option.querySelector("input").checked = false;
+            })
+            age_signup.value = "";
+            errorBox.style.display = "none";
 
-        // RESET ALL INPUT VALUES
-        username_signup.value = "";
-        email_signup.value = "";
-        password_signup.value = "";
-        sex_value = "";
-        sex_options.forEach(option => {
-            option.querySelector("input").checked = false;
+            window.location.href = "index.html";
         })
-        age_signup.value = "";
-        errorBox.style.display = "none";
-
     }
 })
 
