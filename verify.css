@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "LemonMilk";
+  src: url(./fonts/LemonMilk.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #001427;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  padding: 30px 40px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-title {
+  font-size: 35px;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 10px rgba(254, 188, 47, 0.5);
+  text-align: center;
+  color: #ffc833;
+
+  margin: 10px 0px;
+}
+
+.verify-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  color: #acacac;
+}
+
+.verify-resend {
+  background: transparent;
+  border: 1px solid #ffc833;
+  outline: 0;
+  padding: 8px 30px;
+  border-radius: 25px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: 80px;
+  cursor: pointer;
+
+  color: #ffc833;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+
+  transition: 0.4s;
+}
+
+.verify-resend:hover {
+  background: #ffc833;
+  color: #292a45;
+  box-shadow: 0px 0px 15px rgba(254, 188, 47, 0.5);
+}
+
+.verify-alert {
+  background: #292a45;
+  padding: 8px 50px;
+  border-radius: 25px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 14px;
+  color: #acacac;
+
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+
+  transition: opacity 0.5s;
+}
+
+@media (max-width: 415px) {
+
+  .verify-title {
+    margin-bottom: 20px;
+  }
+}
