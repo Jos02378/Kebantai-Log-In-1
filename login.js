@@ -190,7 +190,7 @@ signupButton.addEventListener("click", (e) => {
     let check_whitespace_password = hasWhiteSpace(password_signup.value);
     let email_validation = validate(email_signup.value);
 
-    db.collection('account').where("username", "==", username_signup.value).get().then((snapshot) => {
+    db.collection('account').where("username", "==", username_signup.value.toLowerCase()).get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             if (doc.exists) {
                 duplicate = true;
@@ -256,7 +256,7 @@ signupButton.addEventListener("click", (e) => {
 
                 // Add data to firestore
                 db.collection('account').add({
-                    username: username_signup.value,
+                    username: username_signup.value.toLowerCase(),
                     sex: sex_value,
                     age: age_signup.value,
                     matches_created_join: [],
